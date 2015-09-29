@@ -1,21 +1,18 @@
 include RandomData
 
 
-50.times do
-  Post.create!(
-    title: RandomData.random_sentence,
-    body: RandomData.random_paragraph
-  )
+1.times do
+  Post.find_or_create_by!(title: "Unique title", body: "Lots of random sentences that are unique. Iljljljlj cljjdfljd eorieo cljljdf ereou oeurou.")
 end
 posts = Post.all
 
-
-100.times do
-  Comment.create!(
+1.times do
+  Comment.find_or_create_by!(
     post: posts.sample,
-    body: RandomData.random_paragraph
+    body: "This is my unique comment today. It's awesome."
   )
 end
+
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
