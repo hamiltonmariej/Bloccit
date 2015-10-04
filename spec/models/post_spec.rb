@@ -13,4 +13,12 @@ RSpec.describe Post, type: :model do
       expect(post).to respond_to(:body)
     end
   end
+
+  describe "spam_id" do
+
+    it "sets post[:title] for every fifth post to expected_title" do
+      expected_title = "SPAM"
+      expect(post[:title]).to eq(title: expected_title)
+    end
+  end
 end
