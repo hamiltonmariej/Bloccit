@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   has_many :comments
 
   def spam_id
-    Post.where(post_id % 5 == 4).find_each do |post|
+    Post.where(post_id % 5 == 0).find_each do |post|
       title.update!("SPAM")
     end
   end
