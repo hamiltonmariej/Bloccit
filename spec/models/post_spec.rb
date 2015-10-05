@@ -1,24 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:post) { Post.create!(title: "New Post Title", body: "New Post Body") }
-
-  describe "attributes" do
-
-    it "should respond to title" do
-      expect(post).to respond_to(:title)
-    end
-
-    it "should respond to body" do
-      expect(post).to respond_to(:body)
-    end
+  20.times do
+    Post.create(title: "New Post Title", body: "New Post Body")
   end
+  let(:posts) {
+    Post.all
+  }
 
-  describe "spam_id" do
+  describe "set_spam_titles" do
 
     it "sets post[:title] for every fifth post to expected_title" do
+      Post.set_spam_titles
       expected_title = "SPAM"
-      expect(post[:title]).to eq(title: expected_title)
+      @posts = Post.all
+      @posts.each_with_index do |post, index|
+        count = index + 1
+        if count % 5 == 0
+            expect(post[:title]).to eq(expected_title)
+        end
+      end
     end
   end
 end
