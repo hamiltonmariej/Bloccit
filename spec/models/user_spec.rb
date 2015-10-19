@@ -25,6 +25,20 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "transform name" do
+    it "should split name at user input spaces"
+      expect(user.name).to_eq "jerry","burns"
+    end
+
+    it "should capitalize the first letter in each word or initial of name" do
+      expect(user.name).to_eq "Jerry","Burns"
+    end
+
+    it "should join the words or initials of name with a space" do
+      expect(user.name).to_eq "Jerry" + ' ' + "Burns"
+    end
+  end
+
   describe "invalid user" do
     let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
     let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
@@ -42,6 +56,5 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email_format).to_not be_valid
     end
 
-    
   end
 end
