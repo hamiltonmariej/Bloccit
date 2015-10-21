@@ -20,8 +20,8 @@ source 'https://rubygems.org'
  group :development do
    gem 'pry-rails'
  end
+ gem 'bcrypt', '~> 3.1.7'
 # Used for encrypting User passwords
- gem 'bcrypt', '>=3.1.10'
  gem 'bootstrap-sass'
  # Use SCSS for stylesheets
  gem 'sass-rails', '~> 5.0'
