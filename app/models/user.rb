@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  before_save { self.name = name.split.map(&:capitalize).join(' ') }
+  before_save { self.name = name.split.map{ |namepart| namepart.capitalize}.join(' ') }
   validates :name, capitalize: true
 end
