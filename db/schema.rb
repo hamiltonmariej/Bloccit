@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103202734) do
+ActiveRecord::Schema.define(version: 20151106012052) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -60,6 +60,31 @@ ActiveRecord::Schema.define(version: 20151103202734) do
 
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "ratelings", force: :cascade do |t|
+    t.integer  "rating_id"
+    t.integer  "topic_id"
+    t.integer  "post_id"
+    t.integer  "ratingable_id"
+    t.string   "ratingable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "ratelings", ["post_id"], name: "index_ratelings_on_post_id"
+  add_index "ratelings", ["rating_id"], name: "index_ratelings_on_rating_id"
+  add_index "ratelings", ["ratingable_type", "ratingable_id"], name: "index_ratelings_on_ratingable_type_and_ratingable_id"
+  add_index "ratelings", ["topic_id"], name: "index_ratelings_on_topic_id"
+
+  create_table "ratings", force: :cascade do |t|
+    t.string   "severity"
+    t.integer  "ratingable_id"
+    t.string   "ratingable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "ratings", ["ratingable_type", "ratingable_id"], name: "index_ratings_on_ratingable_type_and_ratingable_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
