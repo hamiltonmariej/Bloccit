@@ -76,5 +76,18 @@ RSpec.describe Post, type: :model do
         expect(post.rank).to eq(old_rank - 1)
       end
     end
+
+    describe "after_create" do
+      before do
+        @new_post = Post.new(title: 'Post Title', body: 'Post Body', user: user)
+      end
+
+      it "creates a favorite for the post the user just created and emails user" do
+        favorite = user.favorites.create(post: post)
+        expect(FavoriteMailer).to receive(:new_post).with(user, post, @new_post).and_return(double(deliver_now: true))
+
+        @new_post.save
+      end
+    end
   end
 end
