@@ -76,5 +76,17 @@ RSpec.describe Post, type: :model do
         expect(post.rank).to eq(old_rank - 1)
       end
     end
+
+    describe "after_create" do
+
+      before do
+        @post = Post.new(title: "Post Title", body: "Post Body", user: user)
+      end
+
+      it "up votes a post when user creates their post" do
+        user.votes.create!(value: 1)
+        expect( post.points ).to eq(value: 1)
+      end
+    end
   end
 end
