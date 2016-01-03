@@ -1,0 +1,6 @@
+<% if @post.update_vote.valid? %>
+  $('.js-votes').replaceWith("<%= escape_javascript(render(@post)) %>");
+  $('#post-' +<%= @post.id %>).hide();
+<% else %>
+  $('.flash').prepend("<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= flash[:error] %></div>");
+<% end %>
