@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -48,6 +49,14 @@
 
     <%= yield %>
   </div>
+<script type="text/javascript">
+var blocmetrics = {};
+blocmetrics.report = function(eventName) {
+  var event = {name: eventName };
+  $.post('http://localhost:3000/api/events', event);
+}
 
+blocmetrics.report('some dynamic event');
+</script>
 </body>
 </html>
